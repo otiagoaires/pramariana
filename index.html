@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Um Presente Especial Para Você!</title>
+  <style>
+    /* Estilos Gerais */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Evita barras de rolagem */
+    }
+
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7); /* Fallback para caso o vídeo não carregue */
+    }
+
+    /* O vídeo de fundo */
+    #background-video {
+      display: none; /* Começa escondido */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover; /* Cobre toda a tela sem distorcer */
+    }
+    
+    /* Camada escura para melhorar a legibilidade do texto sobre o vídeo */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Fica entre o vídeo e o conteúdo */
+      z-index: -1;
+    }
+
+    /* Conteúdo Principal */
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 2.2rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    #yes {
+      background: #ff4e88;
+      color: white;
+    }
+
+    #yes:hover {
+      transform: scale(1.1);
+    }
+
+    #no {
+      background: #ffffff;
+      color: #ff4e88;
+      position: absolute; /* Essencial para a animação de fuga */
+    }
+
+    /* Estilos da Galeria */
+    #gallery-container {
+      display: none; /* Começa escondida */
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #gallery-image {
+      max-width: 80%;
+      max-height: 55vh;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+      border: 3px solid white;
+    }
+
+    #gallery-caption {
+      font-size: 1.5rem;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      font-weight: bold;
+    }
+
+    #next-photo {
+      background: #ff4e88;
+      color: white;
+      margin-top: 15px;
+    }
+    
+    #next-photo:hover {
+      background: #e63d72;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-container">
+    <video id="background-video" loop muted playsinline>
+      <source src="videos/imagens-drone-riobranco2.webm" type="video/mp4">
+      Seu navegador não suporta vídeos.
+    </video>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="content">
+    <h1 id="main-title">Oi Mari, quer ver seu presente?</h1>
+    
+    <div id="buttons-container">
+      <button id="yes">Sim!</button>
+      <button id="no">Não quero</button>
+    </div>
+
+    <div id="gallery-container">
+      <img id="gallery-image" src="" alt="Nossa Foto">
+      <p id="gallery-caption"></p>
+      <button id="next-photo">Próxima Memória ➔</button>
+    </div>
+  </div>
+
+  <script>
+    // --- Seleção dos Elementos ---
+    const mainTitle = document.getElementById("main-title");
+    const buttonsContainer = document.getElementById("buttons-container");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const backgroundVideo = document.getElementById("background-video");
+    
+    // Elementos da Galeria
+    const gallery = document.getElementById("gallery-container");
+    const galleryImage = document.getElementById("gallery-image");
+    const galleryCaption = document.getElementById("gallery-caption");
+    const nextBtn = document.getElementById("next-photo");
+
+    // --- Lógica do Botão "Não" ---
+    noBtn.addEventListener("mouseenter", () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // --- Conteúdo da Galeria: Nossas Memórias ---
+    // ▼▼▼ PERSONALIZE SUAS FOTOS E MENSAGENS AQUI ▼▼▼
+    const memories = [
+      {
+        image: "imagens/foto1.jpg",
+        caption: "O começo de tudo. Mal sabia eu o quanto ia amar você. 😊"
+      },
+      {
+        image: "imagens/foto2.jpg",
+        caption: "Nossa primeira viagem! Cada momento ao seu lado é uma aventura."
+      },
+      {
+        image: "imagens/foto3.png",
+        caption: "E hoje, eu só tenho uma certeza: quero muito mais momentos assim. Feliz Aniversário, meu amor! 💖"
+      }
+    ];
+
+    let currentMemoryIndex = 0;
+
+    // --- Lógica do Botão "Sim" ---
+    yesBtn.addEventListener("click", () => {
+      // Inicia o vídeo de fundo
+      backgroundVideo.style.display = 'block';
+      backgroundVideo.play();
+      
+      // Esconde a pergunta e os botões
+      mainTitle.style.display = "none";
+      buttonsContainer.style.display = "none";
+
+      // Prepara e mostra a galeria com a primeira memória
+      galleryImage.src = memories[currentMemoryIndex].image;
+      galleryCaption.textContent = memories[currentMemoryIndex].caption;
+      gallery.style.display = "flex";
+    });
+
+    // --- Lógica do Botão "Próxima Memória" ---
+    nextBtn.addEventListener("click", () => {
+      currentMemoryIndex++;
+      
+      if (currentMemoryIndex >= memories.length) {
+        // Quando acabarem as fotos, mostra uma mensagem final
+        galleryImage.style.display = "none";
+        nextBtn.style.display = "none";
+        galleryCaption.innerHTML = "🎉 Você é o meu melhor presente! Te amo! 🎉";
+        return;
+      }
+      
+      // Troca a imagem e a legenda para a próxima memória
+      galleryImage.src = memories[currentMemoryIndex].image;
+      galleryCaption.textContent = memories[currentMemoryIndex].caption;
+    });
+  </script>
+
+</body> 
+</html>
