@@ -44,7 +44,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.4); /* Fica entre o vídeo e o conteúdo */
+      background-color: rgba(0, 0, 0, 0.8); /* Fica entre o vídeo e o conteúdo */
       z-index: -1;
     }
 
@@ -133,9 +133,16 @@
       background: #e63d72;
       transform: scale(1.05);
     }
+
+
   </style>
 </head>
 <body>
+  <audio id="background-music" loop>
+  <source src="assets/videoplayback.mp3" type="audio/mpeg">
+  Seu navegador não suporta o elemento de áudio.
+</audio>
+
 
   <div class="background-container">
     <video id="background-video" loop muted playsinline>
@@ -161,6 +168,7 @@
   </div>
 
   <script>
+    const backgroundMusic = document.getElementById("background-music");
     // --- Seleção dos Elementos ---
     const mainTitle = document.getElementById("main-title");
     const buttonsContainer = document.getElementById("buttons-container");
@@ -186,25 +194,32 @@
     const memories = [
       {
         image: "assets/IMG-20250915-WA0274~2.jpg",
-        caption: "O começo de tudo. Nosso primeiro encontro, inesquecível!"
+        caption: "A primeira vez que nos vimos. Lembro como se fosse ontem (e meio que foi)."
       },
       {
-        image: "assets/IMG-20250915-WA0274~2.jpg",
+        image: "assets/IMG-20250920-WA0179~2.jpg",
         caption: "Nossa primeira viagem! Cada momento ao seu lado é uma aventura."
       },
       {
-        image: "assets/IMG-20250915-WA0274~2.jpg",
-        caption: "E hoje, eu só tenho uma certeza: quero muito mais momentos assim. Feliz Aniversário, meu amor! 💖"
+        image: "assets/IMG-20250926-WA0360.jpeg",
+        caption: "Aqui eu já tinho sido vitima do seu charme irresistível."
+      },
+      {
+        image: "assets/b215b95e-0eef-410e-ad38-ee0ae7170d65.jpg",
+        caption: "Aqui eu já tinho sido vitima do seu charme irresistível."
       }
+      
+      
     ];
 
     let currentMemoryIndex = 0;
 
     // --- Lógica do Botão "Sim" ---
-    yesBtn.addEventListener("click", () => {
+  yesBtn.addEventListener("click", () => {
       // Inicia o vídeo de fundo
       backgroundVideo.style.display = 'block';
       backgroundVideo.play();
+      backgroundMusic.play();
       
       // Esconde a pergunta e os botões
       mainTitle.style.display = "none";
@@ -214,7 +229,7 @@
       galleryImage.src = memories[currentMemoryIndex].image;
       galleryCaption.textContent = memories[currentMemoryIndex].caption;
       gallery.style.display = "flex";
-    });
+  });
 
     // --- Lógica do Botão "Próxima Memória" ---
     nextBtn.addEventListener("click", () => {
