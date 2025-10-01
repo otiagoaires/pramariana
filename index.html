@@ -19,7 +19,10 @@
       width: 100%;
       height: 100%;
       z-index: -2;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7); /* Fallback para caso o vídeo não carregue */
+      background-image: url(assets/caht.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
     }
 
     /* O vídeo de fundo */
@@ -63,7 +66,7 @@
 
     h1 {
       color: #fff;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
       margin-bottom: 30px;
     }
@@ -146,7 +149,8 @@
 
   <div class="background-container">
     <video id="background-video" loop muted playsinline>
-      <source src="videos\VID-20250920-WA0177.mp4" type="video/mp4">
+      
+      <source src="videos\WhatsApp Video 2025-10-01 at 12.49.03.mp4" type="video/mp4">
       Seu navegador não suporta vídeos.
     </video>
     <div class="overlay"></div>
@@ -198,17 +202,34 @@
       },
       {
         image: "assets/IMG-20250920-WA0179~2.jpg",
-        caption: "Nossa primeira viagem! Cada momento ao seu lado é uma aventura."
+        caption: "O dia do nosso primeiro beijo..."
       },
       {
         image: "assets/IMG-20250926-WA0360.jpeg",
-        caption: "Aqui eu já tinho sido vitima do seu charme irresistível."
+        caption: "Aqui eu já tinha sido vitima do seu charme."
+      },
+      {
+        image: "assets/ae300599-d0df-41ad-b64a-97481eaaaf52.jpg",
+        caption: "Se eu um dia eu fui triste, nesse dia eu não lembrava"
       },
       {
         image: "assets/b215b95e-0eef-410e-ad38-ee0ae7170d65.jpg",
-        caption: "Aqui eu já tinho sido vitima do seu charme irresistível."
+        caption: "Sua companhia é meu lugar favorito"
+      },
+      {
+        image: "assets/989c2086-27a6-4f59-83ea-9341f7a1a10a.jpg",
+        caption: "Meus problemas diminuem quando tô contigo"
       }
-      
+      ,
+      {
+        image: "assets/WhatsApp Image 2025-10-01 at 16.12.00.jpeg",
+        caption: "Quem vai ser minha felicidade quando vc for embora?"
+      }
+      ,
+      {
+        image: "assets/WhatsApp Image 2025-10-01 at 12.49.03.jpeg",
+        caption: "Vc NUNCA vai sair da minha memória... nem do meu coração"
+      }      
       
     ];
 
@@ -239,7 +260,7 @@
         // Quando acabarem as fotos, mostra uma mensagem final
         galleryImage.style.display = "none";
         nextBtn.style.display = "none";
-        galleryCaption.innerHTML = "🎉 Você é o meu melhor presente! Te amo! 🎉";
+        galleryCaption.innerHTML = "Você é o meu melhor presente! Te gosto!";
         return;
       }
       
